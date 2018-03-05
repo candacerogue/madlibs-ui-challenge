@@ -1,5 +1,11 @@
 /* Base Application Styles */
 
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  background-color: #15AB5A;
+}
+
 .madlib-line {
   display: block;
   height: 20px;

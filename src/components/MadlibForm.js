@@ -17,7 +17,6 @@ var MadlibForm = React.createClass({
   render: function() {
     return (
       <div className='madlib-form'>
-        <h2>Fill out the form below to create your madlib</h2>
         <form onSubmit={this.onSubmit}>
           <Form
             ref="form"
