@@ -1,18 +1,14 @@
-var React = require('react');
-var MadlibForm = require('./MadlibForm');
+const React = require('react');
+const MadlibForm = require('./MadlibForm');
 
-var Introduction = React.createClass({
-    myClick: function(e){
-        e.preventDefault();
-        alert('hi there');
-    },
+const Introduction = React.createClass({
 
     render: function (){
         return (
             <div>
-                <h1>Flocabulary MadLib</h1>
-                <h2>Fill out the form below to create your madlib</h2>
-                <button type="submit" value="press" onClick={this.myClick}> Let's Begin </button>
+                <h3>Flocabulary MadLib</h3>
+                <h6>Fill out the form below to create your madlib</h6>
+                <button type="submit" value="press" onClick={this.props.changeView}> Let's Begin </button>
             </div>
         )
     }

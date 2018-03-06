@@ -8,31 +8,34 @@ require('styles/App.scss');
 // but it is not required knowledge. Ideally, you will not have to
 // alter any javascript. React comes with an HTML-like syntax
 // called jsx, which you can alter much like HTML.
-var React = require('react');
+const React = require('react');
 
-var Introduction = require('./Introduction');
-var MadlibForm = require('./MadlibForm');
-var SubmittedMadlib = require('./SubmittedMadlib');
+const Introduction = require('./Introduction');
+const MadlibForm = require('./MadlibForm');
+const SubmittedMadlib = require('./SubmittedMadlib');
 
 // These are lyrics to a Flocabulary song that has had some
 // terms replaced for the purposes of the madlib.
-var MADLIB_TEXT = require('../madlibs/bill-of-rights');
+const MADLIB_TEXT = require('../madlibs/bill-of-rights');
 
 // This is the main component of the interface
-var AppComponent = React.createClass({
-
-  //In older versions of React, using createClass should have auto-bound the function to the this keyword, but it hasn't been working no matter what I tried.
-  //Instead of using a keydown to advance the view forward to the MadLibForm I'm going to use a button
-  // handleKeyPress: function(event) {
-  //   console.log('hey');
-  //     return <MadLibForm/>;
-  // },
+const AppComponent = React.createClass({
   
   render: function() {
-    console.log('state looks like' + this.state.componentToDisplay)
-    var content = (
-      <Introduction/>
-
+    let content;
+    if (this.state.showComponent === false) {
+      content = <Introduction 
+                changeView={this.onButtonClick}
+                />;
+    } else {
+      content = <MadlibForm
+                text={this.props.text}
+                onSubmit={
+                value => this.setState({submittedValue: value})
+                }
+                />;
+    }
+      
       // this.state.submittedValue
       // ? (
       //     // check out SubmittedMadlib.js to see the markup for this element
@@ -51,7 +54,6 @@ var AppComponent = React.createClass({
       //       }
       //     />
       //   )
-    );
 
 
     return (
@@ -81,8 +83,14 @@ var AppComponent = React.createClass({
   getInitialState: function() {
     return {
       submittedValue: null,
-      componentToDisplay: 'Introduction'
+      showComponent: false
     };
+  },
+
+  onButtonClick(){
+    this.setState({
+      showComponent: true,
+    })
   },
 
   getDefaultProps: function() {
