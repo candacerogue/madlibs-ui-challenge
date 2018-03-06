@@ -7,6 +7,10 @@ body {
   background-color: #15AB5A;
 }
 
+button{
+  font-size: 14px;
+}
+
 fieldset { border: none; }
 
 .madlib-form {
@@ -32,10 +36,6 @@ fieldset { border: none; }
   outline: none !important;
 }
 
-.form-group form-group-depth-1 form-group {
-
-}
-
 .madlib-line {
   display: block;
   height: 30px;
@@ -43,6 +43,10 @@ fieldset { border: none; }
 
 .madlib-line.last-of-chunk + .madlib-line {
   display: inline-block;
+}
+
+.submitted-madlib{
+ height: 80%;
 }
 
 .user-submitted-value {

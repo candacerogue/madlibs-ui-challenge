@@ -1,7 +1,7 @@
 const React = require('react');
 // We're going to use this open source forms library to create our
 // madlib form
-const t = require('tcomb-form');
+const t = require('tcomb-form'); //Really want to learn more about this form, how do you all override stylesheet? Lots of documentation for React-Native, but not necessarily for the React verison
 const { Form } = t.form;
 const $ = require('jquery');
 
@@ -35,6 +35,7 @@ const MadlibForm = React.createClass({
                 <button
                   className="submit-button"
                   type="submit"
+                  id="formSubmit"
                 >
                   Make your mad lib!
                 </button>
@@ -81,32 +82,50 @@ const MadlibForm = React.createClass({
           number: {
             type: 'number'
           }
-        }
+        }  
       },
       value: {},
       submitted: false,
-      inputs: inputs,
+      inputs: inputs
     };
   },
 
+ //Using Jquery to give focus to current MadLib div
+ //If the form is not completed we're using the key, 'Enter' to trigger focus 
+ //Didn't have enough time to submit more CSS to accomodate  
+  // handleKeyDown: function (e) {
+  //   if (e.key === 'Enter') {
+  //     e.preventDefault();
+  //     var formValues = this.state.value;
+
+  //     if (Object.keys(formValues).length === 8) {
+  //       $('#formSubmit').click();
+  //     } else {
+  //       var $parentDiv = $(`#${e.target.id}`).parent();
+  //       var $nextDiv = $parentDiv.next('.form-group');
+
+  //       $parentDiv.removeClass('has-focus');
+  //       $nextDiv.addClass('show');
+  //       $nextDiv.addClass('has-focus');
+  //       $nextDiv.children('input').focus();
+  //     }
+  //   }
+  // },
+
+  //After component mounts the DOm we want to show the very first label & input and give it focus)
   componentDidMount: function() {
-    // $('.form-group form-group-depth-1 form-group').focus(e => {
-    //   $('.form-group form-group-depth-1 form-group'+ e).removeClass('.form-group form-group-depth-1 form-group');
-    //   $(e.target).parent().addClass('.form-group form-group-depth-1 form-group');
-    // })
+    //$(input).focus();
+    $('#tfid-7-0').focus();
+    $('.form-group-yourFavoriteRight').addClass('show');
+    $('.form-group-yourFavoriteRight').addClass('has-focus');
 
-    // $( ".madlib-form input" ).on('blur', function() {
-    //   if($(this).val() != '') {
-    //     $(this).next('.madlib-form input').fadeIn('slow');
-    // }});
-
-    // $(document).keypress('keypress', function(e){
-    //   if(e.which==13){
-    //     $('.form-group form-group-depth-1 form-group').show()
-    //   }
-    // })
+    $( ".madlib-form input" ).focus(function(e) {
+       $('.has-focus').removeClass('has-focus');
+       $(e.target).parent().addClass('has-focus');
+    });
   },
 
+  //Submitting form values, but need to connect to button id #formSubmit.  
   onSubmit: function(event) {
     event.preventDefault();
     if (this.formsAreValid()) {
@@ -115,12 +134,11 @@ const MadlibForm = React.createClass({
   },
   onChange: function(value, path) {
     this.setState(
-      { value: value },
-      () => {
-        this.refs.form.getComponent(path).validate();
-      }
+      { value: value }
     );
+   this.refs.form.getComponent(path).validate();
   },
+
   formsAreValid: function() {
     return !this.refs.form.validate().errors.length;
   },

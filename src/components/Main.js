@@ -34,46 +34,23 @@ const AppComponent = React.createClass({
                 value => this.setState({submittedValue: value})
                 }
                 />;
-    }
-      
-      // this.state.submittedValue
-      // ? (
-      //     // check out SubmittedMadlib.js to see the markup for this element
-      //     <SubmittedMadlib
-      //       reset={this.reset}
-      //       text={this.props.text}
-      //       value={this.state.submittedValue}
-      //     />
-      //   )
-      // : (
-      //     // check out MadlibForm.js to see the markup for this element
-      //     <MadlibForm
-      //       text={this.props.text}
-      //       onSubmit={
-      //         value => this.setState({submittedValue: value})
-      //       }
-      //     />
-      //   )
+    } 
+
+ //Condtional rendering done on if/else statements, but would eventually like to move them all to ternary operator with default content = Intro component if possible
+
+    if(this.state.submittedValue)
+      return (
+          // check out SubmittedMadlib.js to see the markup for this element
+          <SubmittedMadlib
+            reset={this.reset}
+            text={this.props.text}
+            value={this.state.submittedValue}
+          />
+        )
+     
 
 
     return (
-      // this is the `jsx` which you can alter to your needs. Edit it just
-      // like HTML. use `className='some-class'` instead of
-      // `class='some-class'`. Everything has to be
-      // contained in one single element in the end, so
-      //
-      // **ERROR**
-      // return (
-      //   <div></div>
-      //   <p></p>
-      // )
-      // **GOOD**
-      // return (
-      //   <div>
-      //     <div></div>
-      //     <p></p>
-      //   </div>
-      // )
       <div className="main">
         {content}
       </div>
@@ -87,6 +64,7 @@ const AppComponent = React.createClass({
     };
   },
 
+  //Changes View from introduction to madlib when button is clicked
   onButtonClick(){
     this.setState({
       showComponent: true,

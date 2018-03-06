@@ -1,10 +1,10 @@
 const React = require('react');
 
 const SubmittedMadlib = React.createClass({
-
+  
   render: function() {
     const filledInMadlib = this.getFilledInMadlib();
-
+    
     return (
       // this is what creates the displayed finished
       // madlib
